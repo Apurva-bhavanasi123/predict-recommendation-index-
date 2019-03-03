@@ -5,7 +5,6 @@ Created on Sun Mar  3 07:40:36 2019
 @author: Apoorva
 """
 import pandas as pd
-
 userItemData = pd.read_csv('ratings.csv')#data downloaded through web
 userItemData.head()#display initial row 
 itemList=list(set(userItemData["ItemId"].tolist()))
@@ -45,8 +44,14 @@ for i in range(len(itemList)):
 itemAffinity.head()
 for i in itemList:
     searchItem=i
-    recoList=itemAffinity[itemAffinity.item1==searchItem]\
-            [["item2","score"]]\
-            .sort_values("score", ascending=[0])
+    recoList=itemAffinity[itemAffinity.item1==searchItem]\[["item2","score"]]\.sort_values("score", ascending=[0])
         
     print("Recommendations for item",i, recoList,sep=' ')
+    import matplotlib.pyplot as plt
+    from matplotlib.pyplot import figure
+    plt.rc('figure', figsize=(10, 5))
+    plt.ylim(0,1)
+    plt.plot(recoList)
+    plt.ylabel("Affinity scores")
+    plt.show()
+    
